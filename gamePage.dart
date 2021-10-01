@@ -73,9 +73,6 @@ class _GamePageState extends State<GamePage> {
             Expanded(
             child: Row(
               children: <Widget>[
-
-
-
                 for(var i=0; i<widget.game.numPlayers+playerCount; i++) Expanded(
                   child: Column(
                     children: [

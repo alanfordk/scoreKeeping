@@ -17,6 +17,10 @@ class Game {
     this.gameName = newName;
   }
 
+  getName() {
+    return this.gameName;
+  }
+
   deletePlayer(int i){
     players.removeAt(i);
   }
