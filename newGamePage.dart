@@ -45,7 +45,8 @@ class NewGamePageState extends State<NewGamePage> {
                           color: Colors.black,
                           fontWeight: FontWeight.w500,
                           fontSize: 30),
-                    )),
+                    )
+                ),
                 Container(
                   padding: EdgeInsets.all(10),
                   child: TextField(
@@ -119,11 +120,16 @@ class NewGamePageState extends State<NewGamePage> {
                           numPlayersColor = Colors.red.shade400;
                         }
                         else {
+                          Game game = new Game(gameName, gamePlayers);
+
+                          for(var i=1; i<=gamePlayers; i++){
+                            game.addPlayer();
+                          }
                           Navigator.of(context).pop();
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) => GamePage(gameName: gameName, numPlayers: gamePlayers,)),
+                                builder: (context) => GamePage(game: game,)),
                           );
                         }
                       },

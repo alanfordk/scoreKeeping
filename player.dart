@@ -10,11 +10,21 @@ class Player {
   changeName(String newName){
     this.name = newName;
   }
+  getName(){
+    return this.name;
+  }
 
-  changeScore(int change){
+  getScore(){
+    return this.playerScore;
+  }
+
+  changeScore(int change) {
     this.playerScore = this.playerScore + change;
+  }
+
+  addScoreHistory(int change){
     if (change<0){
-      scoreHistory.add("- " + change.toString());
+      scoreHistory.add("- " + (change.abs()).toString());
     }
     else if (change > 0){
       scoreHistory.add("+ " + change.toString());
@@ -22,9 +32,8 @@ class Player {
     else {
       scoreHistory.add("0");
     }
-
-
   }
+
 
 
 }

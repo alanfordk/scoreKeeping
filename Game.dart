@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'player.dart';
 
 class Game {
   String gameName;
@@ -6,8 +7,18 @@ class Game {
 
   Game(this.gameName, this.numPlayers);
 
+  var players = [];
+
+  addPlayer(){
+    players.add(new Player("newPlayer", 0, []));
+  }
+
   changeGameName(String newName){
     this.gameName = newName;
+  }
+
+  deletePlayer(int i){
+    players.removeAt(i);
   }
 
 }
