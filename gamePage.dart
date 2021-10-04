@@ -70,72 +70,84 @@ class _GamePageState extends State<GamePage> {
                 )
               ],
             ),
+
             Expanded(
-            child: Row(
-              children: <Widget>[
-                for(var i=0; i<widget.game.numPlayers+playerCount; i++) Expanded(
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: (){
-                          editPlayerName(i);
-                        },
-                        child: Text(widget.game.players[i].getName()),
-                      ),
-                      ElevatedButton(
-                          child: Icon(
-                              Icons.add
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.green.shade600,
+              child: Container(
+                child: ListView.builder(
+                padding: const EdgeInsets.all(8),
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: widget.game.players.length,
+                itemBuilder: (BuildContext context, int i) {
+                  return Card(
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            editPlayerName(i);
+                          },
+                          child: Text(widget.game.players[i].getName()),
+                        ),
+                        ElevatedButton(
+                            child: Icon(
+                                Icons.add
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.green.shade600,
 
-                          ),
-                          onPressed: () {
-                            changeScore(i);
-                          }
-                      ),
+                            ),
+                            onPressed: () {
+                              changeScore(i);
+                            }
+                        ),
 
-                      Text(widget.game.players[i].getScore().toString()),
+                        Text(widget.game.players[i].getScore().toString()),
 
-                      if(widget.game.players[i].scoreHistory.length>0)(
                         Expanded(
+                          child: Container(
+                            width: 100,
                             child: ListView.builder(
-                                padding: const EdgeInsets.all(8),
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemCount: widget.game.players[i].scoreHistory.length,
-                                itemBuilder: (BuildContext context, int j) {
-                                  return Row(
-                                      children: [
-                                        Text(widget.game.players[i].scoreHistory[j],
-                                          style: TextStyle(
-                                            fontSize: 30
-                                          ))
-                                      ]
-                                  );
-                                }
+                              padding: const EdgeInsets.all(8),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: widget.game.players[i].scoreHistory.length,
+                              itemBuilder: (BuildContext context, int j) {
+                                return Card(
+                                  child: Text(
+                                    widget.game.players[i].scoreHistory[j],
+                                    style: TextStyle(
+                                      fontSize: 30
+                                    )
+                                  )
+
+                                );
+                              }
                             )
+                          )
+                        ),
+
+                        ElevatedButton(
+                            child: Icon(
+                              Icons.undo,
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.grey,
+                            ),
+                            onPressed: () {
+                              undo(i);
+                            }
                         )
-                      ),
-
-                      ElevatedButton(
-                          child: Icon(
-                            Icons.undo,
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.grey,
-                          ),
-                          onPressed: () {
-                            undo(i);
-                          }
-                      )
 
 
-                    ]
-                  )
-                ),
-              ]
-            )),
+                      ]
+                    )
+                  );
+
+
+                })
+              )
+
+            )
 
 
           ],
