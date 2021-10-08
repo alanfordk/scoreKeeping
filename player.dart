@@ -1,11 +1,27 @@
+import 'package:flutter/cupertino.dart';
+import 'package:hive/hive.dart';
 
 
-class Player {
+
+
+class Player extends HiveObject{
+
+
   String name;
+
   int playerScore;
+
+
   List scoreHistory;
 
   Player(this.name, this.playerScore, this.scoreHistory);
+
+
+  Map<String, dynamic> toJson() => {
+    'name': name,
+    'playerScore': playerScore,
+  };
+
 
   changeName(String newName){
     this.name = newName;
@@ -33,6 +49,18 @@ class Player {
       scoreHistory.add("0");
     }
   }
+
+  undoLastScore(int i){
+    changeScore(i);
+    this.scoreHistory.removeLast();
+  }
+
+  clearScore(){
+    this.playerScore = 0;
+    this.scoreHistory.clear();
+  }
+
+
 
 
 
